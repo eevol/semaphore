@@ -51,7 +51,7 @@ docker run -d \
 ## Development
 
 1. Install VirtualBox & Vagrant
-2. Run `vagrant plugin install gatling-rsync-auto`
+2. Run `vagrant plugin install vagrant-gatling-rsync`
 3. Run `vagrant up` to start the vagrant box
 4. Run `vagrant gatling-rsync-auto` to synchronise changes from your local machine to vagrant
 
