@@ -27,13 +27,14 @@ define([
 
 		$scope.deleteHostGroup = function (hostgroup) {
 			hostgroup.delete($scope.playbook);
-
+            $('.modal-backdrop').hide();
 			hostgroups.get($scope.playbook, function () {
 			});
 		}
 
 		$scope.deleteHost = function (hostgroup, host) {
 			host.delete($scope.playbook, hostgroup);
+			$('.modal-backdrop').hide();
 			hostgroup.getHosts($scope.playbook);
 		}
 

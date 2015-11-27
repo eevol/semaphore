@@ -16,7 +16,7 @@ define([
 
 		$scope.deleteJob = function (job) {
 			job.delete($scope.playbook);
-
+            $('.modal-backdrop').hide();
 			jobs.get($scope.playbook, function () {
 			});
 		}

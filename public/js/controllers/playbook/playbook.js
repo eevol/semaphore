@@ -7,7 +7,7 @@ define([
 
 		$scope.delete = function () {
 			$scope.playbook.delete();
-
+            $('.modal-backdrop').hide();
 			playbooks.getPlaybooks(function () {
 				$state.transitionTo('homepage');
 			})
