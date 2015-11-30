@@ -14,9 +14,9 @@ table.table.table-hover
             td
                 .btn-group.pull-right
                     button.btn.btn-default(ng-click="runJob(job)"): i.fa.fa-fw.fa-play
-                    button.btn.btn-danger(data-toggle='modal', data-target="#mvrDisplayModal"): i.fa.fa-trash-o.fa-fw
+                    button.btn.btn-danger(data-toggle='modal', data-target="#mvrDisplayModal{{$index}}"): i.fa.fa-trash-o.fa-fw
 
-                    #mvrDisplayModal.modal.fade
+                    div(id="mvrDisplayModal{{$index}}", class="modal fade")
                             .modal-dialog
                                 .modal-content
                                     .modal-header

@@ -24,11 +24,11 @@ table.table.table-hover(ng-if="tasks.tasks.length")
                         |  See Output
 
 
-                    button.btn.btn-danger.btn-xs(data-toggle='modal', data-target="#mvrDisplayModal")
+                    button.btn.btn-danger.btn-xs(data-toggle='modal', data-target="#mvrDisplayModal{{$index}}")
                         i.fa.fa-trash.fa-fw
                         |  Remove Task
 
-                    #mvrDisplayModal.modal.fade
+                    div(id="mvrDisplayModal{{$index}}", class="modal fade")
                             .modal-dialog
                                 .modal-content
                                     .modal-header

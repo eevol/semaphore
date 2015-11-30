@@ -6,10 +6,10 @@ div(ng-repeat="hostgroup in hostgroups.hostgroups")
         .btn-group.pull-right
             button.btn.btn-success(ng-click="showAddHost(hostgroup)")
                 | Add Host
-            button.btn.btn-danger(data-toggle='modal', data-target="#mvrDisplayModal1")
+            button.btn.btn-danger(data-toggle='modal', data-target="#mvrDisplayModal1{{$index}}")
                 i.fa.fa-trash.fa-fw
 
-            #mvrDisplayModal1.modal.fade
+            div(id="mvrDisplayModal1{{$index}}", class="modal fade")
                     .modal-dialog
                         .modal-content
                             .modal-header
@@ -42,10 +42,10 @@ div(ng-repeat="hostgroup in hostgroups.hostgroups")
     div(ng-repeat="host in hostgroup.hosts")
         h4 {{ host.data.name }} ({{ host.data.hostname }})
             .btn-group.pull-right
-                button.btn.btn-danger.btn-xs(data-toggle='modal', data-target="#mvrDisplayModal2")
+                button.btn.btn-danger.btn-xs(data-toggle='modal', data-target="#mvrDisplayModal2{{$index}}")
                     i.fa.fa-trash.fa-fw
 
-                #mvrDisplayModal2.modal.fade
+                div(id="mvrDisplayModal2{{$index}}", class="modal fade")
                         .modal-dialog
                             .modal-content
                                 .modal-header
