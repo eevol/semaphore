@@ -42,10 +42,11 @@ div(ng-repeat="hostgroup in hostgroups.hostgroups")
     div(ng-repeat="host in hostgroup.hosts")
         h4 {{ host.data.name }} ({{ host.data.hostname }})
             .btn-group.pull-right
-                button.btn.btn-danger.btn-xs(data-toggle='modal', data-target="#mvrDisplayModal2{{$index}}")
+                button.btn.btn-danger.btn-xs(data-toggle='modal', data-target="#mvrDisplayModal2{{host.data._id}}")
                     i.fa.fa-trash.fa-fw
+                    | Delete
 
-                div(id="mvrDisplayModal2{{$index}}", class="modal fade")
+                div(id="mvrDisplayModal2{{host.data._id}}", class="modal fade")
                         .modal-dialog
                             .modal-content
                                 .modal-header
