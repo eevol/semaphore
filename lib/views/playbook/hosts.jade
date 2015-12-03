@@ -52,12 +52,24 @@ div.hostgroup(ng-repeat="hostgroup in hostgroups.hostgroups")
             .col-sm-7.col-sm-offset-4
                 button.btn.btn-default(ng-click="addHost(hostgroup)") Add Host
 
-    div(ng-repeat="host in hostgroup.hosts")
-        h4 {{ host.data.name }} ({{ host.data.hostname }})
+    div.host(ng-repeat="host in hostgroup.hosts")
+        h4
+            span(ng-hide="editHostMode")
+                {{ host.data.name }} ({{ host.data.hostname }})
+
+            input.form-control(id='host{{$index}}', type='text', ng-show='editHostMode', ng-model='host.data.name')
+            input.form-control(id='host{{$index}}', type='text', ng-show='editHostMode', ng-model='host.data.hostname')
+
             .btn-group.pull-right
                 button.btn.btn-danger.btn-xs(data-toggle='modal', data-target="#mvrDisplayModal2{{host.data._id}}")
                     i.fa.fa-trash.fa-fw
                     | Delete
+
+                button.btn.btn-default.editbtn(ng-hide="editHostMode", ng-click="editHostMode = true; editHost(host)")
+                    | Edit Host
+
+                button.btn.btn-warning.savebtn(ng-show="editHostMode", ng-click="editHostMode = false; saveHost(hostgroup, host)")
+                    | Save Host
 
                 div(id="mvrDisplayModal2{{host.data._id}}", class="modal fade")
                         .modal-dialog

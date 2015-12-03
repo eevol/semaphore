@@ -50,17 +50,30 @@ define([
           $scope.editing = hostgroup;
         }
 
+        // Edit host
+        $scope.editHost = function(host) {
+          $scope.editing = host;
+        }
+
         // Update existing hostgroup
         $scope.save = function (hostgroup) {
-            //console.log(hostgroup);
             hostgroup.save($scope.playbook).success(function (data, status, headers) {
-                    alert('Erfolgreich editiert');
-                })
-                .error(function (data, status, header, config) {
-                    $scope.ServerResponse = data;
-                    console.log(data);
-                });
+            })
+            .error(function (data, status, header, config) {
+                $scope.ServerResponse = data;
+                console.log(data);
+            });
         };
+
+        // Update existing hostgroup
+        $scope.saveHost = function (hostgroup, host) {
+            host.save($scope.playbook, hostgroup).success(function (data, status, headers) {
+            })
+            .error(function (data, status, header, config) {
+                $scope.ServerResponse = data;
+                console.log(data);
+            });
+        }
 
 	}]);
 
