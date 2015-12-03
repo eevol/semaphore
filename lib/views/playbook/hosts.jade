@@ -1,13 +1,24 @@
 h1 Hosts
     button.btn.btn-default.pull-right(ng-click="add()") Add Group
 
-div(ng-repeat="hostgroup in hostgroups.hostgroups")
-    h3 [{{ hostgroup.data.name }}]
+div.hostgroup(ng-repeat="hostgroup in hostgroups.hostgroups")
+    h3
+        span(ng-hide="editMode")
+            [{{ hostgroup.data.name }}]
+
+        input.form-control(id='name{{$index}}', type='text', ng-show='editMode', ng-model='hostgroup.data.name')
+
         .btn-group.pull-right
             button.btn.btn-success(ng-click="showAddHost(hostgroup)")
                 | Add Host
             button.btn.btn-danger(data-toggle='modal', data-target="#mvrDisplayModal1{{$index}}")
                 i.fa.fa-trash.fa-fw
+
+            button.btn.btn-default(ng-hide="editMode", ng-click="editMode = true; edit(hostgroup)")
+                | Edit Host
+
+            button.btn.btn-warning(ng-show="editMode", ng-click="editMode = false; save(hostgroup)")
+                | Save Host
 
             div(id="mvrDisplayModal1{{$index}}", class="modal fade")
                     .modal-dialog
@@ -24,6 +35,8 @@ div(ng-repeat="hostgroup in hostgroups.hostgroups")
                                     i.fa.fa-trash-o.fa-fw
                                     | Delete
 
+
+    .clearfix
 
     form.form-horizontal(ng-if="hostgroup.showingAdd")
         .form-group
@@ -61,7 +74,7 @@ div(ng-repeat="hostgroup in hostgroups.hostgroups")
                                         i.fa.fa-trash-o.fa-fw
                                         | Delete
         .clearfix
-
+    hr
 #addHostGroup.modal.fade
     .modal-dialog
         .modal-content(ng-controller="AddHostGroupCtrl")

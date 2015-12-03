@@ -44,6 +44,24 @@ define([
 
 			$scope.showAddHost(hostgroup);
 		}
+
+		// Edit hostgroup
+        $scope.edit = function(hostgroup) {
+          $scope.editing = hostgroup;
+        }
+
+        // Update existing hostgroup
+        $scope.save = function (hostgroup) {
+            //console.log(hostgroup);
+            hostgroup.save($scope.playbook).success(function (data, status, headers) {
+                    alert('Erfolgreich editiert');
+                })
+                .error(function (data, status, header, config) {
+                    $scope.ServerResponse = data;
+                    console.log(data);
+                });
+        };
+
 	}]);
 
 	app.registerController('AddHostGroupCtrl', ['$scope', 'HostGroup', 'hostgroups', function($scope, HostGroup, hostgroups) {
