@@ -15,7 +15,7 @@ div.hostgroup(ng-repeat="hostgroup in hostgroups.hostgroups")
                 i.fa.fa-trash.fa-fw
 
             button.btn.btn-default(ng-hide="editMode", ng-click="editMode = true; edit(hostgroup)")
-                | Edit Host
+                | Edit Hostgroup
 
             button.btn.btn-warning(ng-show="editMode", ng-click="editMode = false; save(hostgroup)")
                 | Save Host
