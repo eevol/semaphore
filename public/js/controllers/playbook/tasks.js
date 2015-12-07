@@ -64,7 +64,7 @@ define([
 			task.delete($scope.playbook, task.data.job)
 			.success(function () {
 				$scope.status = 'Task Deleted';
-
+                $('.modal-backdrop').hide();
 				for (var i = 0; i < $scope.tasks.tasks.length; i++) {
 					if ($scope.tasks.tasks[i] == task) {
 						$scope.tasks.tasks.splice(i, 1);

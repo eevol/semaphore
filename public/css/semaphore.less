@@ -19,7 +19,7 @@
 }
 
 ui-view {
-	& > h1, & > h2, & > h3, & > h4, & > h5, & > h6 {
+	h1, h2, h3, h4, h5, h6 {
 		margin-top: 0;
 	}
 }
@@ -31,7 +31,37 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ul.nav {
-	& > li.active a {
+	li.active a {
 		background-color: #eee;
 	}
+}
+
+.hostgroup {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    float: left;
+    max-width: 300px;
+    &:after {
+        clear:both;
+    }
+}
+
+.editbtn, .savebtn {
+    padding: 0 12px;
+}
+
+.host {
+  border:none;
+  border-bottom:1px dotted #ddd;
+  padding: 7px 0;
+
+  &:last-of-type {
+    border: none;
+  }
+}
+
+hr {
+    border-top:1px solid #000;
 }

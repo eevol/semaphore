@@ -1,47 +1,107 @@
 h1 Hosts
-	button.btn.btn-default.pull-right(ng-click="add()") Add Group
+    button.btn.btn-default.pull-right(ng-click="add()") Add Group
 
-div(ng-repeat="hostgroup in hostgroups.hostgroups")
-	h3 [{{ hostgroup.data.name }}]
-		.btn-group.pull-right
-			button.btn.btn-success(ng-click="showAddHost(hostgroup)") Add Host
-			button.btn.btn-danger(ng-click="deleteHostGroup(hostgroup)"): i.fa.fa-trash-o.fa-fw
+div.hostgroup(ng-repeat="hostgroup in hostgroups.hostgroups")
+    h3
+        span(ng-hide="editMode")
+            [{{ hostgroup.data.name }}]
 
-	form.form-horizontal(ng-if="hostgroup.showingAdd")
-		.form-group
-			label.control-label.col-sm-4 Name
-			.col-sm-7
-				input.form-control(type="text" placeholder="Host Name" ng-model="hostgroup.newHost.data.name")
-		.form-group
-			label.control-label.col-sm-4 Hostname
-			.col-sm-7
-				input.form-control(type="text" placeholder="Hostname" ng-model="hostgroup.newHost.data.hostname")
+        input.form-control(id='name{{$index}}', type='text', ng-show='editMode', ng-model='hostgroup.data.name')
 
-		.form-group
-			.col-sm-7.col-sm-offset-4
-				button.btn.btn-default(ng-click="addHost(hostgroup)") Add Host
+        .btn-group.pull-right
+            button.btn.btn-success(ng-click="showAddHost(hostgroup)")
+                | Add Host
+            button.btn.btn-danger(data-toggle='modal', data-target="#mvrDisplayModal1{{$index}}")
+                i.fa.fa-trash.fa-fw
 
-	div(ng-repeat="host in hostgroup.hosts")
-		h4 {{ host.data.name }} ({{ host.data.hostname }})
-			.btn-group.pull-right
-				button.btn.btn-danger.btn-xs(ng-click="deleteHost(hostgroup, host)"): i.fa.fa-trash-o.fa-fw
-		.clearfix
+            button.btn.btn-default(ng-hide="editMode", ng-click="editMode = true; edit(hostgroup)")
+                | Edit Hostgroup
 
+            button.btn.btn-warning(ng-show="editMode", ng-click="editMode = false; save(hostgroup)")
+                | Save Host
+
+            div(id="mvrDisplayModal1{{$index}}", class="modal fade")
+                    .modal-dialog
+                        .modal-content
+                            .modal-header
+                                button.close(type='button', data-dismiss='modal', aria-hidden='true') &times;
+                                h4.modal-title Delete hostgroup
+                            .modal-body
+                                p Sure you want to delete this hostgroup?
+                                p #{foo}
+                            .modal-footer
+                                button.btn.btn-default(type='button', data-dismiss='modal') Cancel
+                                button#delete.btn.btn-danger(type='button', ng-click="deleteHostGroup(hostgroup)")
+                                    i.fa.fa-trash-o.fa-fw
+                                    | Delete
+
+
+    .clearfix
+
+    form.form-horizontal(ng-if="hostgroup.showingAdd")
+        .form-group
+            label.control-label.col-sm-4 Name
+            .col-sm-7
+                input.form-control(type="text" placeholder="Host Name" ng-model="hostgroup.newHost.data.name")
+        .form-group
+            label.control-label.col-sm-4 Hostname
+            .col-sm-7
+                input.form-control(type="text" placeholder="Hostname" ng-model="hostgroup.newHost.data.hostname")
+
+        .form-group
+            .col-sm-7.col-sm-offset-4
+                button.btn.btn-default(ng-click="addHost(hostgroup)") Add Host
+
+    div.host(ng-repeat="host in hostgroup.hosts")
+        h4
+            span(ng-hide="editHostMode")
+                {{ host.data.name }} ({{ host.data.hostname }})
+
+            input.form-control(id='host{{$index}}', type='text', ng-show='editHostMode', ng-model='host.data.name')
+            input.form-control(id='host{{$index}}', type='text', ng-show='editHostMode', ng-model='host.data.hostname')
+
+            .btn-group.pull-right
+                button.btn.btn-danger.btn-xs(data-toggle='modal', data-target="#mvrDisplayModal2{{host.data._id}}")
+                    i.fa.fa-trash.fa-fw
+                    | Delete
+
+                button.btn.btn-default.editbtn(ng-hide="editHostMode", ng-click="editHostMode = true; editHost(host)")
+                    | Edit Host
+
+                button.btn.btn-warning.savebtn(ng-show="editHostMode", ng-click="editHostMode = false; saveHost(hostgroup, host)")
+                    | Save Host
+
+                div(id="mvrDisplayModal2{{host.data._id}}", class="modal fade")
+                        .modal-dialog
+                            .modal-content
+                                .modal-header
+                                    button.close(type='button', data-dismiss='modal', aria-hidden='true') &times;
+                                    h4.modal-title Delete host
+                                .modal-body
+                                    p Sure you want to delete this host?
+                                    p #{foo}
+                                .modal-footer
+                                    button.btn.btn-default(type='button', data-dismiss='modal') Cancel
+                                    button#delete.btn.btn-danger(type='button', ng-click="deleteHost(hostgroup, host)")
+                                        i.fa.fa-trash-o.fa-fw
+                                        | Delete
+        .clearfix
+    hr
 #addHostGroup.modal.fade
-	.modal-dialog
-		.modal-content(ng-controller="AddHostGroupCtrl")
-			.modal-header
-				button(data-dismiss="modal").close: span &times;
-				h4.modal-title Add Host Group
-			.modal-body
-				form.form-horizontal
-					.form-group
-						label.control-label.col-sm-4 Name
-						.col-sm-7
-							input.form-control(type="text" placeholder="Group Name" ng-model="hostgroup.data.name")
+    .modal-dialog
+        .modal-content(ng-controller="AddHostGroupCtrl")
+            .modal-header
+                button(data-dismiss="modal").close: span &times;
+                h4.modal-title Add Host Group
+            .modal-body
+                form.form-horizontal
+                    .form-group
+                        label.control-label.col-sm-4 Name
+                        .col-sm-7
+                            input.form-control(type="text" placeholder="Group Name" ng-model="hostgroup.data.name")
 
-					.form-group
-						.col-sm-7.col-sm-offset-4
-							button.btn.btn-default(ng-click="add()") Add HostGroup
+                    .form-group
+                        .col-sm-7.col-sm-offset-4
+                            button.btn.btn-default(ng-click="add()") Add HostGroup
 
 blockquote Hosts are like Ansible inventories. They define host groups and hosts which are used to connect to remote servers.

@@ -1,4 +1,3 @@
 #!/bin/bash
 
-cd /opt/semaphore/
-PORT=3000 node bin/semaphore.js
+su - semaphore -c "cd /opt/semaphore && node bin/semaphore.js"

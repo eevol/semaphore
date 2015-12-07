@@ -50,8 +50,8 @@ docker run -d \
 
 ## Development
 
-1. Install VirtualBox & Vagrant
-2. Run `vagrant plugin install gatling-rsync-auto`
+1. Install VirtualBox & Vagrant & Ansible
+2. Run `vagrant plugin install vagrant-gatling-rsync`
 3. Run `vagrant up` to start the vagrant box
 4. Run `vagrant gatling-rsync-auto` to synchronise changes from your local machine to vagrant
 
@@ -60,7 +60,7 @@ docker run -d \
 1. `vagrant ssh`, `cd /opt/semaphore`
 2. `npm install`
 3. `bower install`
-4. `npm install -g nodemon`
+4. `sudo npm install -g nodemon`
 5. `nodemon bin/semaphore`
 
 ## Initial Login
@@ -76,7 +76,7 @@ Use these variables to override the config.
 
 | Variable Name | Description            | Default Value                   |
 | ------------- | ---------------------- | ------------------------------- |
-| PORT          | Web Port               | `80`                            |
+| PORT          | Web Port               | `3000`                            |
 | REDIS_PORT    | Redis Port             | `6379`                          |
 | REDIS_HOST    | Redis Hostname         | `127.0.0.1`                     |
 | REDIS_KEY     | Redis auth key         |                                 |
